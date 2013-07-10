@@ -368,14 +368,14 @@ do i=0,nmsdlength-1
                 do ip2=ip1,nspecies
                     associate( p_spec2 => species(ip2) )
                         write(70+(ip1*nspecies)+ip2,*) time, msdcoll(i,ip1,ip2)
-                        msdcoll(i,ip1,ip2) = msdcoll(i,ip1,ip2) * p_spec1%z*p_spec2%z &
-                                          * sqrt( float(p_spec1%num*p_spec2%num) )/float(num)
-                        if (ip1.ne.ip2) work=work+msdcoll(i,ip1,ip2)
-                        work=work+msdcoll(i,ip1,ip2)
+                        msdcoll(i,ip1,ip2) = msdcoll(i,ip1,ip2) * p_spec1%z * p_spec2%z &
+                                           * sqrt( float(p_spec1%num*p_spec2%num) )/float(num)
+                        if (ip1.ne.ip2) work = work + msdcoll(i,ip1,ip2)
+                        work = work + msdcoll(i,ip1,ip2)
                     end associate
                 enddo
             endif
-            wnernst=wnernst+species(ip1)%msd_av(i)*p_spec1%z*p_spec1%z*float(p_spec1%num)/float(num)
+            wnernst = wnernst + species(ip1)%msd_av(i) * p_spec1%z * p_spec1%z * float(p_spec1%num) / float(num)
         end associate
     enddo
     write( workfile%unit,* ) time,work
