@@ -1,7 +1,7 @@
 program msdcalc
 
 use fileio
-use ion_class, only : ion_type
+!use ion_class, only : ion_type
 use species_class, only : species_type
 
 implicit none 
@@ -31,8 +31,8 @@ logical :: restart = .false.
 logical :: endrun = .false.
 logical :: readfrominpt_log = .false.
 
-integer :: i, j, k, l, i1, n, i2, ispec, nt, ipt, ip, ip1, ip2, n1, n2
-integer :: ipoint, nbin, err
+integer :: i, j, k, l, i1, n, i2, nt, ip, ip1, ip2, n1, n2
+integer :: nbin, err
 real(long) :: dum1, dum2
 real(long), parameter :: time_au_to_ps = 2.418884d-5
 real :: bin
