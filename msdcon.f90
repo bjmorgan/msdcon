@@ -46,6 +46,7 @@ type(iofile) :: dispfile, rstfile, nernstfile, workfile
 type(iofile), allocatable, dimension(:) :: msdabsfile, msdfile
 
 character(len=20) filename
+integer :: string_pos
 
 !Set up io
 call inptfile%init( "msd.inpt" )
@@ -62,6 +63,8 @@ call nernstfile%fopen('w')
 !==================================================
 
 read( inptfile%unit, '(a)' ) filein 
+string_pos = index( filein, ' ' )
+if( string_pos .ne. 0 ) filein = filein(1:string_pos - 1)
 call dispfile%init( filein ) 
 call dispfile%fopen('r')
 
