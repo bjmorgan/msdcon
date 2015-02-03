@@ -23,7 +23,8 @@ integer :: num = 0
 integer :: nstep = 0
 integer :: nrun
 integer :: nspecies
-real(long) :: dtime, rn, time, work, wnernst
+real( long ) :: dtime ! timestep in au
+real( long ) :: rn, time, work, wnernst
 
 character( len = 200 ) :: filein
 logical :: overflow = .false.
@@ -33,19 +34,19 @@ logical :: readfrominpt_log = .false.
 
 integer :: i, j, k, l, i1, n, i2, nt, ip, ip1, ip2, n1, n2
 integer :: nbin, err
-real(long) :: dum1, dum2
-real(long), parameter :: time_au_to_ps = 2.418884d-5
+real( long ) :: dum1, dum2
+real( long ), parameter :: time_au_to_ps = 2.418884d-5
 real :: bin
 
 integer :: get_nt
 external :: check_allocation, get_nt
 
 ! iofiles
-type(iofile) :: inptfile
-type(iofile) :: dispfile, rstfile, nernstfile, workfile
-type(iofile), allocatable, dimension(:) :: msdabsfile, msdfile
+type( iofile ) :: inptfile
+type( iofile ) :: dispfile, rstfile, nernstfile, workfile
+type( iofile ), allocatable, dimension(:) :: msdabsfile, msdfile
 
-character(len=20) filename
+character( len=20 ) :: filename
 integer :: string_pos
 
 !Set up io
@@ -353,12 +354,12 @@ do ip1=1,nspecies
     endif
 enddo
 
-do i=0,nmsdlength-1
-    time=(dble(i)+1)*dble(nmsdcalltime)*dtime*2.418d-5
-    do ip=1, nspecies
-        associate(p_spec => species(ip))
-            write( msdfile(ip)%unit, '(5(e12.5,1x))') time, p_spec%msd_av(i), p_spec%msd(i,x), p_spec%msd(i,y), p_spec%msd(i,z)
-            write( msdabsfile(ip)%unit, '(4(e12.5,1x))') time, p_spec%msdabs( i, x ), p_spec%msdabs( i, y ), p_spec%msdabs( i, z )
+do i = 0, nmsdlength - 1
+    time = ( dble( i + 1 ) ) * dble( nmsdcalltime ) * dtime * time_au_to_ps
+    do ip = 1, nspecies
+        associate( p_spec => species(ip) )
+            write( msdfile(ip)%unit, '(5(e12.5,1x))' ) time, p_spec%msd_av(i), p_spec%msd(i,x), p_spec%msd(i,y), p_spec%msd(i,z)
+            write( msdabsfile(ip)%unit, '(4(e12.5,1x))' ) time, p_spec%msdabs( i, x ), p_spec%msdabs( i, y ), p_spec%msdabs( i, z )
         end associate
     enddo
 
