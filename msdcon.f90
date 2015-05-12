@@ -31,6 +31,7 @@ logical :: overflow = .false.
 logical :: restart = .false.
 logical :: endrun = .false.
 logical :: readfrominpt_log = .false.
+logical :: skip_header = .false.
 
 integer :: i, j, k, l, i1, n, i2, nt, ip, ip1, ip2, n1, n2
 integer :: nbin, err
@@ -160,11 +161,14 @@ if (readfrominpt_log) then
     read (inptfile%unit,*) nmsdcalltime
     read (inptfile%unit,*) dtime
     read (inptfile%unit,*) nrun
+    read (inptfile%unit,*) skip_header
 
-    read( dispfile%unit, * ) nbin, bin, nbin
-    do i=1, num
-        read( dispfile%unit, * ) nbin
-    enddo
+    if ( skip_header ) then
+        read( dispfile%unit, * ) nbin, bin, nbin
+        do i=1, num
+            read( dispfile%unit, * ) nbin
+        enddo
+    endif
 else
     read ( dispfile%unit, * ) nmsdcalltime, dtime, nrun
     do i=1, num

@@ -1,6 +1,6 @@
 OBJS=msdcon.o fileio.o ions.o species.o
 EXECUTABLE=msdcon
-FC=nagfor
+FC=ifort
 
 all: app
 
