@@ -8,8 +8,8 @@ Example input file `msd.inpt`:
     864 number of species 2
     2.0  charge on species 2
     .false.  restart?
-    .false.
-    200   
-    100.000000000000           
-    174000
-
+    .false.  read disp.out data from this input file?
+    200      steps per disp.out frame
+    100.0    timestep      
+    174000   simulation length (timesteps)
+    .true.   skip disp.out header
