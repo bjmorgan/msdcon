@@ -47,7 +47,7 @@ type( iofile ) :: inptfile
 type( iofile ) :: dispfile, rstfile, nernstfile, workfile
 type( iofile ), allocatable, dimension(:) :: msdabsfile, msdfile
 
-character( len=20 ) :: filename
+character( len=30 ) :: filename
 integer :: string_pos
 
 !Set up io

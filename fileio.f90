@@ -3,7 +3,7 @@ module fileio
     implicit none
 
     type iofile
-        character(len=20) :: filename
+        character(len=30) :: filename
         integer :: unit
     contains
         procedure :: init => file_init
